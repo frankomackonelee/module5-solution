@@ -1,0 +1,77 @@
+<div class="container">
+
+  <h1>Sign up</h1>
+  <div>Fill iln your details to receive our newsletter</div>
+  <fieldset>
+    <form name='regForm' novalidate class='regForm'>
+
+      <input type="text" name="firstname" placeholder="First name"
+      ng-model="reg.user.firstname"
+      required
+      ng-minlength="2"
+      ng-maxlength="20">
+      <span
+        ng-if="(regForm.firstname.$error.minlength || regForm.firstname.$error.required) && regForm.firstname.$touched">
+        first name must be at least 2 characters long
+      </span>
+      <span ng-if="regForm.firstname.$error.maxlength">
+        first name must not be longer than 20 characters
+      </span>
+      <br>
+
+      <input type="text" name="lastname" placeholder="last name"
+      ng-model="reg.user.lastname"
+      required
+      ng-minlength="2"
+      ng-maxlength="20">
+      <span
+        ng-if="(regForm.lastname.$error.minlength || regForm.lastname.$error.required) && regForm.lastname.$touched">
+        last name must be at least 2 characters long
+      </span>
+      <span ng-if="regForm.lastname.$error.maxlength">
+        last name must not be longer than 20 characters
+      </span>
+      <br>
+
+      <input type="email" name="email" placeholder="Email"
+        ng-model="reg.user.email"
+        required>
+        <span ng-if="regForm.email.$invalid && regForm.email.$touched">
+          Must be a valid email address: handle@domain format
+        </span>
+        <br>
+
+      <input type="text" name="phone" placeholder="Phone ##########"
+        ng-model="reg.user.phone"
+        pattern="(\d{10})"
+        required>
+        <span ng-if="regForm.phone.$invalid && regForm.phone.$touched">
+          Phone must contain 10 digits.
+        </span>
+        <br>
+
+        <input type="text" name="short_name" placeholder="Short name eg. 'L'"
+          ng-model="reg.user.short_name"
+          required>
+          <span ng-if="regForm.short_name.$invalid && regForm.short_name.$touched">
+            Please include a short name
+          </span>
+          <span ng-if="reg.short_name_error">
+            Your chosen short_name {{reg.user.short_name}} is not recognised
+          </span>
+          <br>
+
+      <button ng-click="reg.submitUserInfo()"
+              ng-disabled="regForm.$invalid"
+              class="btn btn-warning"
+      >Submit</button>
+
+    </form>
+  </fieldset>
+
+  <div id="info" ng-show="reg.user_data_saved">
+    Your data has been successfully saved
+  </div>
+
+
+</div>
